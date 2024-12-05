@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter2.task9;
 
+
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
@@ -52,10 +53,70 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 18;
+        System.out.println(getPascalTriangle(n));
+    }
+
+    static int getMaxLineLength(int n) {
+        int maxLength = 0;
+
+        for (int j = 1; j <= n; j++) {
+            int[] array = new int[j];
+            array[0] = 1;
+
+            for (int i = 1; i < j; i++) {
+                double coefficient = (double) (j - i) / i;
+                array[i] = (int) Math.round(array[i - 1] * coefficient);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int num : array) {
+                sb.append(num).append(" ");
+            }
+
+            String currentLine = sb.toString().trim();
+
+          maxLength = Math.max(currentLine.length(), maxLength);
+        }
+
+        return maxLength;
     }
 
     static String getPascalTriangle(int n) {
         // Ваш код
-        return null;
+        StringBuilder result = new StringBuilder();
+        if (n < 0) {
+            return "";
+        }
+
+        int maxLength = getMaxLineLength(n);
+
+        for (int j = 1; j <= n; j++) {
+            int[] array = new int[j];
+            array[0] = 1;
+
+            for (int i = 1; i < j; i++) {
+                double coefficient = (double) (j - i) / i;
+                array[i] = (int) Math.round(array[i - 1] * coefficient);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int num : array) {
+                sb.append(num).append(" ");
+            }
+
+            String currentLine = sb.toString().trim();
+            int numberOfSpace = (maxLength - currentLine.length()) / 2;
+
+            if (j < n) {
+                for (int k = 0; k < numberOfSpace; k++) {
+                    result.append(" ");
+                }
+            }
+
+            result.append(currentLine).append("\n");
+        }
+
+        return result.toString();
     }
 }
