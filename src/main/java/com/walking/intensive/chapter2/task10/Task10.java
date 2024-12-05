@@ -12,10 +12,33 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        String inputString = " Муза! Ранясь шилом опыта, ты помолишься на разум.";
+        System.out.println(isPalindrome(inputString));
     }
 
     static boolean isPalindrome(String inputString) {
         // Ваш код
-        return false;
+        if ((inputString == null) || (inputString.equals("")) || (inputString.length() == 1)) {
+            return false;
+        }
+
+        String punctuationMark = ".!,;:-? ";
+        StringBuilder correctedString = new StringBuilder();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            char currentSymbol = inputString.charAt(i);
+            if (!punctuationMark.contains(String.valueOf(currentSymbol))) {
+                correctedString.append(currentSymbol);
+            }
+        }
+
+        StringBuilder invertedString = new StringBuilder();
+
+        for (int j = correctedString.length() - 1; j >= 0; j--) {
+            invertedString.append(correctedString.charAt(j));
+        }
+
+        return correctedString.toString().equalsIgnoreCase(invertedString.toString());
+
     }
 }
