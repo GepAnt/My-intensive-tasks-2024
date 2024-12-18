@@ -94,11 +94,10 @@ public class Task9 {
     static int getLength(int n) {
         StringBuilder line = new StringBuilder();
         int previous = 1;
-        int i = 0;
 
         line.append(previous);
 
-        for (i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             previous = getResult(previous, n, i);
             line.append(" ").append(previous);
         }
