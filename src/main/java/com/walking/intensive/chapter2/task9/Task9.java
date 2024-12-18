@@ -57,66 +57,51 @@ public class Task9 {
         System.out.println(getPascalTriangle(n));
     }
 
-    static int getMaxLineLength(int n) {
-        int maxLength = 0;
-
-        for (int j = 1; j <= n; j++) {
-            int[] array = new int[j];
-            array[0] = 1;
-
-            for (int i = 1; i < j; i++) {
-                double coefficient = (double) (j - i) / i;
-                array[i] = (int) Math.round(array[i - 1] * coefficient);
-            }
-
-            StringBuilder sb = new StringBuilder();
-            for (int num : array) {
-                sb.append(num).append(" ");
-            }
-
-            String currentLine = sb.toString().trim();
-
-          maxLength = Math.max(currentLine.length(), maxLength);
-        }
-
-        return maxLength;
-    }
-
     static String getPascalTriangle(int n) {
         // Ваш код
-        StringBuilder result = new StringBuilder();
-        if (n < 0) {
-            return "";
-        }
+        int maxLength = getLength(n);
+        StringBuilder finalResult = new StringBuilder();
 
-        int maxLength = getMaxLineLength(n);
+        for (int i = 1; i <= n; i++) {
+            StringBuilder line = new StringBuilder("1");
+            int previous = 1;
 
-        for (int j = 1; j <= n; j++) {
-            int[] array = new int[j];
-            array[0] = 1;
-
-            for (int i = 1; i < j; i++) {
-                double coefficient = (double) (j - i) / i;
-                array[i] = (int) Math.round(array[i - 1] * coefficient);
+            for (int j = 1; j < i; j++) {
+                previous = getResult(previous, i, j);
+                line.append(" ").append(previous);
             }
 
-            StringBuilder sb = new StringBuilder();
-            for (int num : array) {
-                sb.append(num).append(" ");
-            }
+            int spaceNumber = (maxLength - line.length()) / 2;
 
-            String currentLine = sb.toString().trim();
-            int numberOfSpace = (maxLength - currentLine.length()) / 2;
-
-            if (j < n) {
-                for (int k = 0; k < numberOfSpace; k++) {
-                    result.append(" ");
+            if (i < n) {
+                for (int j = 0; j < spaceNumber; j++) {
+                    finalResult.append(" ");
                 }
             }
 
-            result.append(currentLine).append("\n");
+            finalResult.append(line).append("\n");
         }
 
-        return result.toString();
+        return finalResult.toString();
+    }
+
+    public static int getResult(int previous, int i, int j) {
+        double coefficient = (double) (i - j) / j;
+
+        return (int) Math.round(previous * coefficient);
+    }
+
+    static int getLength(int n) {
+        StringBuilder line = new StringBuilder();
+        int previous = 1;
+
+        line.append(previous);
+
+        for (int i = 1; i < n; i++) {
+            previous = getResult(previous, n, i);
+            line.append(" ").append(previous);
+        }
+
+        return line.length();
     }
 }
