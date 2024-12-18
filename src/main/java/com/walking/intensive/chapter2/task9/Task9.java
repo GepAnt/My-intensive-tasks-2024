@@ -74,7 +74,7 @@ public class Task9 {
             int spaceNumber = (maxLength - line.length()) / 2;
 
             if (i < n) {
-                for (int k = 0; k < spaceNumber; k++) {
+                for (int j = 0; j < spaceNumber; j++) {
                     finalResult.append(" ");
                 }
             }
@@ -94,14 +94,13 @@ public class Task9 {
     static int getLength(int n) {
         StringBuilder line = new StringBuilder();
         int previous = 1;
+        int i = 0;
 
-        for (int i = 0; i < n; i++) {
-            if (i == 0) {
-                line.append(previous);
-            } else {
-                previous = getResult(previous, n, i);
-                line.append(" ").append(previous);
-            }
+        line.append(previous);
+
+        for (i = 1; i < n; i++) {
+            previous = getResult(previous, n, i);
+            line.append(" ").append(previous);
         }
 
         return line.length();
