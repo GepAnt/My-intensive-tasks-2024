@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -22,6 +24,10 @@ package com.walking.intensive.chapter4.task17;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] array = new int[]{1, 2, 6, 4, 5, 63, 4, 21, 5};
+
+        System.out.println(Arrays.toString(sortByBubble(array)));
+//        System.out.println(sortByQuicksort(array));
     }
 
     /**
@@ -41,8 +47,18 @@ public class Task17 {
      */
     static int[] sortByBubble(int[] array) {
         // Ваш код
-        return new int[]{};
+        int[] newArray = new int[array.length];
+
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                newArray[i] = array[i + 1];
+            } else {
+                newArray[i] = array[i];
+            }
+        }
+        return newArray;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
