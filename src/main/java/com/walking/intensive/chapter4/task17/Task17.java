@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] array = new int[]{7, 2, 5, 3, 2, 4};
+        int[] array = new int[]{7, 2, 5, 3, 1, 4};
 
         System.out.println(Arrays.toString(sortByBubble(array)));
 //        System.out.println(sortByQuicksort(array));
@@ -47,23 +47,33 @@ public class Task17 {
      */
     static int[] sortByBubble(int[] array) {
         // Ваш код
-        int[] newArray = new int[array.length];
+        int n = array.length;
+        int[] newArray = new int[n];
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < n; i++) {
             newArray[i] = array[i];
         }
 
-        for (int i = 0; j = 0; i < newArray.length - 1 ;i++; j++){
-            if (newArray[i] > array[i + 1]) {
-                newArray[i] = array[i + 1];
-                newArray[i + 1] = array[i];
-                break;
+        while (n >= 0) {
+            int[] tempArray = new int[n];
 
+            for (int i = 0; i < n; i++) {
+                tempArray[i] = newArray[i];
             }
-            i++;
+
+            for (int i = 0, j = 0; i < n - 1; i++, j++) {
+                if (newArray[i] > tempArray[i + 1]) {
+                    newArray[i] = tempArray[i + 1];
+                    newArray[i + 1] = tempArray[j];
+                    j--;
+                } else {
+                   continue;
+                }
+            }
+            n = tempArray.length - 1;
         }
 
-        return sortByBubble(newArray);
+        return newArray;
     }
 
     /**
