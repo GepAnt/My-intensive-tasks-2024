@@ -2,6 +2,7 @@ package com.walking.intensive.chapter4.task17;
 
 import java.util.Arrays;
 
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -24,10 +25,11 @@ import java.util.Arrays;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] array = new int[]{7, 1, 5, 3, 1, 88};
+        int[] array = new int[]{57, 29, 100, 78, 28, 28, 16, 57};
 
-        System.out.println(Arrays.toString(sortByBubble(array)));
-//        System.out.println(sortByQuicksort(array));
+//        System.out.println(Arrays.toString(sortByBubble(array)));
+//        System.out.println(Arrays.toString(sortByQuicksort(array)));
+        System.out.println(getBenchmarkOn1000());
     }
 
     /**
@@ -48,30 +50,18 @@ public class Task17 {
     static int[] sortByBubble(int[] array) {
         // Ваш код
         int n = array.length;
-        int[] newArray = new int[n];
 
-        for (int i = 0; i < n; i++) {
-            newArray[i] = array[i];
-        }
-
-        while (n > 0) {
-            int[] tempArray = new int[n];
-
-            for (int i = 0; i < n; i++) {
-                tempArray[i] = newArray[i];
-            }
-
-            for (int i = 0, j = 0; i < n - 1; i++, j++) {
-                if (newArray[i] > tempArray[i + 1]) {
-                    newArray[i] = tempArray[i + 1];
-                    newArray[i + 1] = tempArray[j];
-                    j--;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
-            n--;
         }
 
-        return newArray;
+        return array;
     }
 
     /**
@@ -116,7 +106,26 @@ public class Task17 {
      */
     static int[] sortByQuicksort(int[] array) {
         // Ваш код
+        int propElement = getPropElement(array);
+        System.out.println(propElement);
         return new int[]{};
+    }
+
+    static int getPropElement(int[] arr) {
+        int max = arr[0];
+        int min = arr[0];
+
+        for (int i : arr) {
+            if (i > max) {
+                max = i;
+            }
+
+            if (i < min) {
+                min = i;
+            }
+        }
+
+        return (max + min) / 2;
     }
 
     /**
@@ -129,6 +138,14 @@ public class Task17 {
      */
     static long getBenchmarkOn1000() {
         // Ваш код
+        int[] randomArray = new int[999];
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = (int) (Math.random() * 100);
+        }
+
+        int[] arr = sortByBubble(randomArray);
+
+       // System.out.println(Arrays.toString(arr));
         return 0;
     }
 
