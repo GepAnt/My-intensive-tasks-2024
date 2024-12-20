@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] array = new int[]{7, 2, 5, 3, 1, 4};
+        int[] array = new int[]{7, 1, 5, 3, 1, 88};
 
         System.out.println(Arrays.toString(sortByBubble(array)));
 //        System.out.println(sortByQuicksort(array));
@@ -54,7 +54,7 @@ public class Task17 {
             newArray[i] = array[i];
         }
 
-        while (n >= 0) {
+        while (n > 0) {
             int[] tempArray = new int[n];
 
             for (int i = 0; i < n; i++) {
@@ -66,11 +66,9 @@ public class Task17 {
                     newArray[i] = tempArray[i + 1];
                     newArray[i + 1] = tempArray[j];
                     j--;
-                } else {
-                   continue;
                 }
             }
-            n = tempArray.length - 1;
+            n--;
         }
 
         return newArray;
