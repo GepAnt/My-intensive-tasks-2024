@@ -25,7 +25,7 @@ import java.util.Arrays;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] array = new int[]{57, 29, 100, 78, 28, 28, 16, 57};
+        int[] array = new int[]{57, 29, 100, 78, 28, 28, 16, 60};
 
 //        System.out.println(Arrays.toString(sortByBubble(array)));
         System.out.println(Arrays.toString(sortByQuicksort(array)));
@@ -108,6 +108,7 @@ public class Task17 {
     static int[] sortByQuicksort(int[] array) {
         // Ваш код
         int propElement = getPropElement(array);
+
         System.out.println(propElement);
         return new int[]{};
     }
@@ -145,7 +146,6 @@ public class Task17 {
         }
 
         int[] arr = sortByBubble(randomArray);
-
        // System.out.println(Arrays.toString(arr));
         return 0;
     }
