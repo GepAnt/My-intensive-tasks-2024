@@ -127,13 +127,25 @@ public class Task16 {
             return new int[]{};
         }
 
-        int maxlength = Math.max(arr1.length, arr2.length);
-        int[] newArr1 = getNewArrayWithZero(arr1, maxlength);
-        int[] newArr2 = getNewArrayWithZero(arr2, maxlength);
-        int[] result = new int[maxlength];
+        int maxLength = Math.max(arr1.length, arr2.length);
+        int[] result = new int[maxLength];
 
-        for (int i = 0; i < maxlength; i++) {
-            result[i] = newArr1[i] * newArr2[i];
+        for (int i = 0; i < maxLength; i++) {
+            int value1;
+            if (i < arr1.length) {
+                value1 = arr1[i];
+            } else {
+                value1 = 0;
+            }
+
+            int value2;
+            if (i < arr2.length) {
+                value2 = arr2[i];
+            } else {
+                value2 = 0;
+            }
+
+            result[i] = value1 * value2;
         }
 
         return result;
@@ -161,12 +173,23 @@ public class Task16 {
         }
 
         int maxlength = Math.max(arr1.length, arr2.length);
-        int[] newArr1 = getNewArrayWithZero(arr1, maxlength);
-        int[] newArr2 = getNewArrayWithZero(arr2, maxlength);
         int[] result = new int[maxlength];
 
         for (int i = 0; i < maxlength; i++) {
-            result[i] = newArr1[i] - newArr2[i];
+            int value1;
+            if (i < arr1.length) {
+                value1 = arr1[i];
+            } else {
+                value1 = 0;
+            }
+
+            int value2;
+            if (i < arr2.length) {
+                value2 = arr2[i];
+            } else {
+                value2 = 0;
+            }
+            result[i] = value1 - value2;
         }
 
         return result;
@@ -222,20 +245,20 @@ public class Task16 {
         int[] newArray = new int[arr.length + 1];
 
         if (index > arr.length) {
+            newArray[newArray.length - 1] = newValue;
             for (int i = 0; i < arr.length; i++) {
                 newArray[i] = arr[i];
-                newArray[newArray.length - 1] = newValue;
             }
-        } else {
 
-            for (int i = 0, j = 0; i < newArray.length; i++, j++) {
-                if (i == index) {
-                    newArray[i] = newValue;
-                    j--;
-                } else {
+            return newArray;
+        }
 
-                    newArray[i] = arr[j];
-                }
+        for (int i = 0, j = 0; i < newArray.length; i++, j++) {
+            if (i == index) {
+                newArray[i] = newValue;
+                j--;
+            } else {
+                newArray[i] = arr[j];
             }
         }
 
@@ -340,20 +363,19 @@ public class Task16 {
 
         if (index > arr.length) {
             return arr;
-        } else {
-
-            int[] newArray = new int[arr.length - 1];
-            int newIndex = 0;
-
-            for (int i = 0; i < arr.length; i++) {
-                if (i != index) {
-                    newArray[newIndex] = arr[i];
-                    newIndex++;
-                }
-            }
-
-            return newArray;
         }
+
+        int[] newArray = new int[arr.length - 1];
+        int newIndex = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i != index) {
+                newArray[newIndex] = arr[i];
+                newIndex++;
+            }
+        }
+
+        return newArray;
     }
 
     /**
@@ -409,7 +431,7 @@ public class Task16 {
      */
     static boolean isSimilar(int[] arr1, int[] arr2) {
         // Ваш код
-        return (isMatches(arr1, arr2) && isMatches(arr2, arr1));
+        return isMatches(arr1, arr2) && isMatches(arr2, arr1);
     }
 
     /**
@@ -440,20 +462,6 @@ public class Task16 {
         }
 
         return newArr;
-    }
-
-    static int[] getNewArrayWithZero(int[] array, int newLength) {
-        int[] newArray = new int[newLength];
-
-        for (int i = 0; i < array.length; i++) {
-            newArray[i] = array[i];
-        }
-
-        for (int i = array.length; i < newLength; i++) {
-            newArray[i] = 0;
-        }
-
-        return newArray;
     }
 
     static boolean isMatches(int[] array1, int[] array2) {
