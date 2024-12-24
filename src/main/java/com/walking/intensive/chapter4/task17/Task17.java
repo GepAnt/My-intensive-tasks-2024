@@ -28,8 +28,9 @@ public class Task17 {
         int[] array = new int[]{57, 29, 100, 78, 28, 28, 16, 57};
 
 //        System.out.println(Arrays.toString(sortByBubble(array)));
-//        System.out.println(Arrays.toString(sortByQuicksort(array)));
-        System.out.println(getBenchmarkOn1000());
+        System.out.println(Arrays.toString(sortByQuicksort(array)));
+//        System.out.println(getBenchmarkOn1000());
+
     }
 
     /**
