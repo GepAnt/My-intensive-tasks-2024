@@ -128,9 +128,10 @@ public class Task16 {
         }
 
         int maxLength = Math.max(arr1.length, arr2.length);
+        int minLength = Math.min(arr1.length, arr2.length);
         int[] result = new int[maxLength];
 
-        for (int i = 0; i < maxLength; i++) {
+        for (int i = 0; i < minLength; i++) {
             int value1;
             if (i < arr1.length) {
                 value1 = arr1[i];
@@ -138,14 +139,7 @@ public class Task16 {
                 value1 = 0;
             }
 
-            int value2;
-            if (i < arr2.length) {
-                value2 = arr2[i];
-            } else {
-                value2 = 0;
-            }
-
-            result[i] = value1 * value2;
+            result[i] = value1 * arr2[i];
         }
 
         return result;
