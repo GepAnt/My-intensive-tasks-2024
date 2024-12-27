@@ -188,10 +188,10 @@ public class Task17 {
             randomArray[i] = (int) (Math.random() * 100);
         }
 
-        int strartTimeBubble = (int) System.currentTimeMillis();
+        int startTimeBubble = (int) System.currentTimeMillis();
         int[] arr1 = sortByBubble(randomArray);
         int endTimeBubble = (int) System.currentTimeMillis();
-        int durationBubble = endTimeBubble - strartTimeBubble;
+        int durationBubble = endTimeBubble - startTimeBubble;
 
         int startTimeQuick = (int) System.currentTimeMillis();
         int[] arr2 = sortByQuicksort(randomArray);
@@ -212,10 +212,10 @@ public class Task17 {
             randomArray[i] = (int) (Math.random() * 100);
         }
 
-        int strartTimeBubble = (int) System.currentTimeMillis();
+        int startTimeBubble = (int) System.currentTimeMillis();
         int[] arr1 = sortByBubble(randomArray);
         int endTimeBubble = (int) System.currentTimeMillis();
-        int durationBubble = endTimeBubble - strartTimeBubble;
+        int durationBubble = endTimeBubble - startTimeBubble;
 
         int startTimeQuick = (int) System.currentTimeMillis();
         int[] arr2 = sortByQuicksort(randomArray);
