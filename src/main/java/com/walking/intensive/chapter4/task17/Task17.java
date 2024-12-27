@@ -25,12 +25,12 @@ import java.util.Arrays;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] array = new int[]{57, 29, 100, 78, 28, 27, 16, 60};
+        int[] array = new int[]{66, 55, 34, -4, 88, 44, 33, 99, 10};
 
-//        System.out.println(Arrays.toString(sortByBubble(array)));
+        System.out.println(Arrays.toString(sortByBubble(array)));
         System.out.println(Arrays.toString(sortByQuicksort(array)));
-//        System.out.println(getBenchmarkOn1000());
-
+        System.out.println(getBenchmarkOn1000());
+        System.out.println(getBenchmarkOn10000());
     }
 
     /**
@@ -50,6 +50,10 @@ public class Task17 {
      */
     static int[] sortByBubble(int[] array) {
         // Ваш код
+        if (array == null) {
+            return new int[]{};
+        }
+
         int n = array.length;
 
         for (int i = 0; i < n - 1; i++) {
@@ -107,47 +111,66 @@ public class Task17 {
      */
     static int[] sortByQuicksort(int[] array) {
         // Ваш код
-        if (array.length < 2) {
-            return array;
+        if (array == null) {
+            return new int[]{};
         }
 
-        int propElement = getPropElement(array);
+        int left = 0;
+        int right = array.length - 1;
 
-        for (int i = 0; i < array.length; i++) {
+        quickSort(array, left, right);
 
-            for (int j = array.length - 1; j > 0; j--) {
-                if (i > j) {
-                    break;
-                } else if (array[i] >= propElement && array[j] <= propElement) {
-                    int temp = array[j];
-                    array[j] = array[i];
-                    array[i] = temp;
-                    i = 0;
-                    break;
-                }
-            }
-        }
-
-
-        System.out.println(propElement);
-        return new int[]{};
+        return array;
     }
 
-    static int getPropElement(int[] arr) {
-        int max = arr[0];
-        int min = arr[0];
+    static void quickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
 
-        for (int i : arr) {
-            if (i > max) {
-                max = i;
+        int max = arr[right];
+        int min = arr[left];
+
+        for (int i = left; i <= right; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
             }
 
-            if (i < min) {
-                min = i;
+            if (arr[i] < min) {
+                min = arr[i];
             }
         }
 
-        return (max + min) / 2;
+        int propElement = (max + min) / 2;
+
+        int i = left;
+        int j = right;
+
+        while (i <= j) {
+            while (arr[i] < propElement) {
+                i++;
+            }
+
+            while (arr[j] > propElement) {
+                j--;
+            }
+
+            if (i <= j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        if (left < j) {
+            quickSort(arr, left, j);
+        }
+
+        if (right > i) {
+            quickSort(arr, i, right);
+        }
     }
 
     /**
@@ -165,9 +188,17 @@ public class Task17 {
             randomArray[i] = (int) (Math.random() * 100);
         }
 
-        int[] arr = sortByBubble(randomArray);
-        // System.out.println(Arrays.toString(arr));
-        return 0;
+        int strartTimeBubble = (int) System.currentTimeMillis();
+        int[] arr1 = sortByBubble(randomArray);
+        int endTimeBubble = (int) System.currentTimeMillis();
+        int durationBubble = endTimeBubble - strartTimeBubble;
+
+        int startTimeQuick = (int) System.currentTimeMillis();
+        int[] arr2 = sortByQuicksort(randomArray);
+        int endTimeQuick = (int) System.currentTimeMillis();
+        int durationQuick = endTimeQuick - startTimeQuick;
+
+        return Math.abs(durationQuick - durationBubble);
     }
 
     /**
@@ -175,6 +206,22 @@ public class Task17 {
      */
     static long getBenchmarkOn10000() {
         // Ваш код
-        return 0;
+        int[] randomArray = new int[9999];
+
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = (int) (Math.random() * 100);
+        }
+
+        int strartTimeBubble = (int) System.currentTimeMillis();
+        int[] arr1 = sortByBubble(randomArray);
+        int endTimeBubble = (int) System.currentTimeMillis();
+        int durationBubble = endTimeBubble - strartTimeBubble;
+
+        int startTimeQuick = (int) System.currentTimeMillis();
+        int[] arr2 = sortByQuicksort(randomArray);
+        int endTimeQuick = (int) System.currentTimeMillis();
+        int durationQuick = endTimeQuick - startTimeQuick;
+
+        return Math.abs(durationQuick - durationBubble);
     }
 }
