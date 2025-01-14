@@ -54,7 +54,7 @@ public class Task16 {
      */
     static boolean isEqualSize(int[] arr1, int[] arr2) {
         // Ваш код
-        return arr1.length != 0 && arr2.length != 0 && arr1.length == arr2.length;
+        return arr1.length != 0 && arr1.length == arr2.length;
     }
 
     /**
@@ -132,14 +132,7 @@ public class Task16 {
         int[] result = new int[maxLength];
 
         for (int i = 0; i < minLength; i++) {
-            int value1;
-            if (i < arr1.length) {
-                value1 = arr1[i];
-            } else {
-                value1 = 0;
-            }
-
-            result[i] = value1 * arr2[i];
+            result[i] = arr1[i] * arr2[i];
         }
 
         return result;
